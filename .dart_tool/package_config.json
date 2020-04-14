@@ -356,13 +356,13 @@
       "languageVersion": "2.0"
     },
     {
-      "name": "Monopoly",
+      "name": "monopoly",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.2"
     }
   ],
-  "generated": "2020-04-14T18:34:47.607530Z",
+  "generated": "2020-04-14T18:40:41.121421Z",
   "generator": "pub",
   "generatorVersion": "2.8.0-dev.14.0.flutter-db5dc11b9b"
 }
