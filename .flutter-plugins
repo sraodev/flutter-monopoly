@@ -1,0 +1,10 @@
+# This is a generated file; do not edit or check into version control.
+firebase_auth=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.11.1+12/
+firebase_core=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.4+3/
+firebase_core_web=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2/
+firebase_database=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-3.1.3/
+google_sign_in=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.3.0/
+google_sign_in_web=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.8.4/
+shared_preferences=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.6+3/
+shared_preferences_macos=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-0.0.1+6/
+shared_preferences_web=/Users/sri/Documents/SDK/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+4/
