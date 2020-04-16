@@ -52,10 +52,14 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
   Key _plusKey = Key('plus');
   Key _sevenKey = Key('seven');
   Key _sixKey = Key('six');
-  TextEditingController _textEditingController;
   Key _threeKey = Key('three');
   Key _twoKey = Key('two');
   Key _zeroKey = Key('zero');
+  Key _redCardKey = Key('redCardKey');
+  Key _blueCardKey = Key('blueCardKey');
+  Key _greenCardKey = Key('greenCardKey');
+  Key _yellowCardKey = Key('yellowCardKey');
+  TextEditingController _textEditingController;
 
   void initState() {
     super.initState();
@@ -289,11 +293,25 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         _currentValues.clear();
         lastValue = null;
         savedLastValue = false;
+        _actionKey = null;
         _textEditingController.clear();
       } else if (identical(_equalsKey, key)) {
         calculateValue();
         savedLastValue = false;
+      } else if (identical(_redCardKey, key)) {
+        calculateValue();
+        savedLastValue = false;
+      }else if (identical(_blueCardKey, key)) {
+        calculateValue();
+        savedLastValue = false;
+      }else if (identical(_greenCardKey, key)) {
+        calculateValue();
+        savedLastValue = false;
+      }else if (identical(_yellowCardKey, key)) {
+        calculateValue();
+        savedLastValue = false;
       }
+
     });
   }
 
@@ -367,9 +385,10 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
     return list;
   }
 
-  KeyItem buildKeyItem(String val, Key key) {
+  KeyItem buildKeyItem(String val, Key key, Color color) {
     return KeyItem(
       key: key,
+      color: color,
       child: Text(
         val,
         style: TextStyle(
@@ -383,13 +402,13 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
     );
   }
 
-  Widget _buildPayCard(List<Plant> plants, int cardIndex){
+  Widget _buildPayCard(List<Plant> plants, int cardIndex, Key cardKey){
     return KeyItem(
-        key: _equalsKey,
+        key: cardKey,
         onKeyTap: onKeyTapped,
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(100.0),
               color: plants[cardIndex].color,
               boxShadow: [
                 BoxShadow(
@@ -402,40 +421,46 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  //color : AppColors.mainColor,
+                  color: plants[cardIndex].color,
 //                  color: (widget.showIndex == index)
 //                      ? AppColors.mainColor
 //                      : AppColors.secondColor,
                 ),
 
-                height: 70.0,
-                width: 70.0,
+                height: 75.0,
+                width: 75.0,
               ),
               RichText(
-                  text: TextSpan(
-                    // set the default style for the children TextSpans
-                      children: [
-                        TextSpan(
-                            style: TextStyle(
-                                fontSize: 35,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.white),
-                            children: <InlineSpan>[
-                              TextSpan(
-                                  text: ' ${widget.plants[cardIndex].light.toInt()}'),
-                              WidgetSpan(
-                                alignment: PlaceholderAlignment.top,
-                                child: Text('%',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.grey)),
-                              ),
-                            ]),
-                      ])),
+                      text: TextSpan(
+                        // set the default style for the children TextSpans
+                          children: [
+                            TextSpan(
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w100,
+                                    color: Colors.white),
+                                children: <InlineSpan>[
+                                  TextSpan(
+                                      text: ""),//' ${widget.plants[cardIndex].name}'),
+                                  WidgetSpan(
+                                    //padding: EdgeInsets.all(8.0),
+                                    alignment: PlaceholderAlignment.middle,
+                                    child: Text(' ${widget.plants[cardIndex].name}',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.grey)),
+                                  ),
+                                ]),
+                          ])),
+
+
             ],
           ),
+
         )
+
+
     );
   }
 
@@ -485,11 +510,11 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
 //                buildActionButton('+', _plusKey),
 //                buildActionButton('-', _minusKey),
 //                buildActionButton('x', _multiplyKey),
-//                buildActionButton('/', _divideKey)
+//                buildActionButton('/', _equalsKey)
 //              ],
 //            ),
               Container(
-                //padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 color: CupertinoColors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -497,67 +522,60 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          buildKeyItem('7', _sevenKey),
-                          buildKeyItem('8',_eightKey),
-                          buildKeyItem('9',_nineKey),
+                          buildKeyItem('7', _sevenKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('8',_eightKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('9',_nineKey, widget.plants[widget.card.index].color),
                         ],
                       ),
                     //Divider(color: widget.plant.color,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          buildKeyItem('4',_fourKey),
-                          buildKeyItem('5',_fiveKey),
-                          buildKeyItem('6',_sixKey),
+                          buildKeyItem('4',_fourKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('5',_fiveKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('6',_sixKey, widget.plants[widget.card.index].color),
                         ],
                       ),
                     //Divider(color: widget.plant.color,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          buildKeyItem('1',_oneKey),
-                          buildKeyItem('2',_twoKey),
-                          buildKeyItem('3',_threeKey),
+                          buildKeyItem('1',_oneKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('2',_twoKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('3',_threeKey, widget.plants[widget.card.index].color),
                         ],
                       ),
                     //Divider(color: widget.plant.color,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          buildKeyItem('.',_dotKey),
-                          buildKeyItem('0',_zeroKey),
-                          buildKeyItem('C',_allClearKey),
-//                          KeyItem(
-//                            key: _clearKey,
-//                            child: Icon(
-//                              Icons.backspace,
-//                              size: 10,
-//                              color: keypadColor,
-//                            ),
-//                            onKeyTap: onKeyTapped,
-//                          ),
+                          buildKeyItem('.',_dotKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('0',_zeroKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('C',_allClearKey, widget.plants[widget.card.index].color),
                         ],
                       ),
                     //Divider(color: widget.plants[widget.card.index].color,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          buildKeyItem('M',_allClearKey),
-                          buildKeyItem('K',Key('')),
-                          buildActionButton("Pay", _plusKey),
+                          buildKeyItem('M',_allClearKey, widget.plants[widget.card.index].color),
+                          buildKeyItem('K',Key(''), widget.plants[widget.card.index].color),
+                          buildActionButton("Pay", _plusKey, widget.plants[widget.card.index].color),
                         ],
                       ),
                   ],
                 ),
               ),
             Divider(color: widget.plants[widget.card.index].color,),
-//            Row(crossAxisAlignment: CrossAxisAlignment.center, children: <
-//                Widget>[
-//              _buildPayCard(plants, (Monopoly.PLAYER_RED.index == widget.card.index)? 0 : Monopoly.PLAYER_RED.index),
-//              _buildPayCard(plants, (Monopoly.PLAYER_GREEN.index == widget.card.index)? 0 : Monopoly.PLAYER_GREEN.index),
-//              _buildPayCard(plants, (Monopoly.PLAYER_BLUE.index == widget.card.index)? 0 : Monopoly.PLAYER_BLUE.index),
-//              _buildPayCard(plants, (Monopoly.PLAYER_YELLOW.index == widget.card.index)? 0 : Monopoly.PLAYER_YELLOW.index),
-//            ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _buildPayCard(plants, (Monopoly.PLAYER_RED.index == widget.card.index)? 0 : Monopoly.PLAYER_RED.index, _redCardKey),
+                _buildPayCard(plants, (Monopoly.PLAYER_BLUE.index == widget.card.index)? 0 : Monopoly.PLAYER_BLUE.index, _blueCardKey),
+                _buildPayCard(plants, (Monopoly.PLAYER_GREEN.index == widget.card.index)? 0 : Monopoly.PLAYER_GREEN.index, _greenCardKey),
+                _buildPayCard(plants, (Monopoly.PLAYER_YELLOW.index == widget.card.index)? 0 : Monopoly.PLAYER_YELLOW.index, _yellowCardKey),
+              ],
+            ),
             SizedBox(height: 10.0),
           ],
         ),
@@ -566,13 +584,14 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
 
   }
 
-  ActionButton buildActionButton(String name , Key key) {
+  ActionButton buildActionButton(String name , Key key, Color color) {
     return ActionButton(
       key: key,
       actionName: name,
       onTapped: onActionTapped,
       enabled: identical(_actionKey, key) ? true : false,
       //padding: height > 100 ? EdgeInsets.all(10.0) : EdgeInsets.all(0.0),
+      changedBackground: color,
     );
   }
 
@@ -596,7 +615,7 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
                     _buildHeader(context),
                     _buildPlantInfo(),
                     Container(
-                      height: 40.0,
+                      height: 35.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30.0),
@@ -622,13 +641,13 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
 }
 
 class ActionButton extends StatelessWidget {
-  ActionButton({@required this.actionName,this.onTapped,this.enabled,this.key,this.padding}) : super(key : key);
+  ActionButton({@required this.actionName,this.onTapped,this.enabled,this.key,this.padding, this.changedBackground}) : super(key : key);
 
   final String actionName;
-  final Color changedBackground = primaryColor;
+  final Color changedBackground;
   final Color changedForeground = Colors.white;
   final Color defaultBackground = Colors.transparent;
-  final Color defaultForeground = primaryColor;
+  final Color defaultForeground = Colors.grey;
   final bool enabled;
   final Key key;
   final ActionCallBack onTapped;
@@ -640,7 +659,7 @@ class ActionButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         padding: padding ?? EdgeInsets.all(0.0),
-        color: Color(0xffF6F6F6),
+        color: Colors.white,
         child: GestureDetector(
           onTap: () {
             onTapped(key);
@@ -652,9 +671,9 @@ class ActionButton extends StatelessWidget {
               actionName,
               style: TextStyle(
                   color: enabled ? changedForeground : defaultForeground,
-                  fontSize: 20.0,
+                  fontSize: 25.0,
                   fontFamily: 'Avenir',
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.w500
               ),
             ),
           ),
@@ -665,11 +684,12 @@ class ActionButton extends StatelessWidget {
 }
 
 class KeyItem extends StatelessWidget {
-  KeyItem({@required this.child,this.key,this.onKeyTap});
+  KeyItem({@required this.child,this.key,this.onKeyTap, this.color});
 
   final Widget child;
   final Key key;
   final KeyCallBack onKeyTap;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -678,7 +698,7 @@ class KeyItem extends StatelessWidget {
       child: Material(
         type: MaterialType.transparency,
         child: InkResponse(
-          splashColor: primaryColor,
+          splashColor: color,
           highlightColor: Colors.white,
           onTap: () => onKeyTap(key),
           child: Container(
