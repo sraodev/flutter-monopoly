@@ -299,6 +299,8 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         calculateValue();
         savedLastValue = false;
       } else if (identical(_redCardKey, key)) {
+        _currentValues.clear();
+        _currentValues.add('15000');
         calculateValue();
         savedLastValue = false;
       }else if (identical(_blueCardKey, key)) {
@@ -311,7 +313,6 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         calculateValue();
         savedLastValue = false;
       }
-
     });
   }
 
@@ -406,60 +407,73 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
     return KeyItem(
         key: cardKey,
         onKeyTap: onKeyTapped,
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100.0),
-              color: plants[cardIndex].color,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 1.0,
-                ),
-              ]),
-          child: Stack(
+      child: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(5),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: plants[cardIndex].color,
-//                  color: (widget.showIndex == index)
-//                      ? AppColors.mainColor
-//                      : AppColors.secondColor,
-                ),
+              Row(crossAxisAlignment: CrossAxisAlignment.center, children: <
+                  Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100.0),
+                      color: plants[cardIndex].color,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 1.0,
+                        ),
+                      ]),
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: plants[cardIndex].color,
+                        ),
 
-                height: 75.0,
-                width: 75.0,
+                        height: 75.0,
+                        width: 75.0,
+                      )
+                    ],
+                  ),
+                ),
+              ]
               ),
-              RichText(
+              Row(crossAxisAlignment: CrossAxisAlignment.center, children: <
+                  Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 2, 0, 0),
+                  child : RichText(
                       text: TextSpan(
                         // set the default style for the children TextSpans
                           children: [
                             TextSpan(
                                 style: TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w100,
-                                    color: Colors.white),
+                                    color: Colors.black),
                                 children: <InlineSpan>[
                                   TextSpan(
-                                      text: ""),//' ${widget.plants[cardIndex].name}'),
-                                  WidgetSpan(
-                                    //padding: EdgeInsets.all(8.0),
-                                    alignment: PlaceholderAlignment.middle,
-                                    child: Text(' ${widget.plants[cardIndex].name}',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.grey)),
-                                  ),
+                                      text: '${widget.plants[cardIndex].name}'),//' ${widget.plants[cardIndex].name}'),
+//                                WidgetSpan(
+//                                  //padding: EdgeInsets.all(8.0),
+//                                  alignment: PlaceholderAlignment.middle,
+//                                  child: Text(' ${widget.plants[cardIndex].name}',
+//                                      style: TextStyle(
+//                                          fontSize: 15,
+//                                          fontWeight: FontWeight.normal,
+//                                          color: Colors.grey)),
+//                                ),
                                 ]),
                           ])),
-
-
-            ],
-          ),
-
-        )
-
+                ),
+              ]
+              ),
+            ]
+        ),
+      ),
 
     );
   }
