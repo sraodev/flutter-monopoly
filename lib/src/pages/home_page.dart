@@ -16,13 +16,7 @@ import 'package:monopoly/src/widgets/description_widget.dart';
 import 'package:monopoly/src/widgets/monopoly_icon_icons.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-enum Monopoly {
-  BANKER,
-  PLAYER_RED,
-  PLAYER_GREEN,
-  PLAYER_BLUE,
-  PLAYER_YELLOW
-}
+enum Monopoly { BANKER, PLAYER_RED, PLAYER_GREEN, PLAYER_BLUE, PLAYER_YELLOW }
 
 class HomePage extends StatefulWidget {
   @override
@@ -118,7 +112,7 @@ class _HomePageState extends State<HomePage>
         alerts: 'Please fill the water tank'),
     Plant(
         name: 'Player 4',
-        color: Colors.yellow[500],
+        color: Colors.yellow[700],
         type: ['Indoor', 'Outdoor'],
         top: true,
         plantOfTheMonth: true,
@@ -126,7 +120,7 @@ class _HomePageState extends State<HomePage>
         size: 'Average',
         image: 'assets/images/cat_palm.png',
         description:
-        'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
+            'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
         temperature: 20,
         light: 80,
         totalAmount: 15.000,
@@ -164,15 +158,15 @@ class _HomePageState extends State<HomePage>
               children: <Widget>[
                 RichText(
                     text: TextSpan(
-                      // set the default style for the children TextSpans
+                        // set the default style for the children TextSpans
                         children: [
-                          TextSpan(
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w300,
-                                  color: AppColors.mainColor),
-                              text: 'Bank'),
-                        ])),
+                      TextSpan(
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.mainColor),
+                          text: 'Bank'),
+                    ])),
               ],
             ),
           ),
@@ -184,19 +178,19 @@ class _HomePageState extends State<HomePage>
               children: <Widget>[
                 RichText(
                     text: TextSpan(
-                      // set the default style for the children TextSpans
+                        // set the default style for the children TextSpans
                         children: [
-                          TextSpan(
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w300,
-                                  color: AppColors.mainColor),
-                              text: 'Players'),
-                        ])),
+                      TextSpan(
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.mainColor),
+                          text: 'Players'),
+                    ])),
               ],
             ),
           ),
-         // _buildRedPlayer(),
+          // _buildRedPlayer(),
           _buildMonopolyCard(plants, Monopoly.PLAYER_RED),
           SizedBox(height: 10.0),
           //_buildGreenPlayer(),
@@ -224,15 +218,15 @@ class _HomePageState extends State<HomePage>
           children: <Widget>[
             RichText(
                 text: TextSpan(
-                  // set the default style for the children TextSpans
+                    // set the default style for the children TextSpans
                     children: [
-                      TextSpan(
-                          style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.grey[800]),
-                          text: 'Monopoly'),
-                    ])),
+                  TextSpan(
+                      style: TextStyle(
+                          fontSize: 35,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey[800]),
+                      text: 'Monopoly'),
+                ])),
           ],
         ),
       ),
@@ -278,7 +272,7 @@ class _HomePageState extends State<HomePage>
             MaterialPageRoute(
               builder: (context) => MonopolyCardDetailPage(plants, card),
             ),
-          ); 
+          );
           // Navigator.push(
           //   context,
           //   PageRouteBuilder(
@@ -339,17 +333,17 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               Container(
-                child : RichText(
+                child: RichText(
                     text: TextSpan(
-                      // set the default style for the children TextSpans
+                        // set the default style for the children TextSpans
                         children: [
-                          TextSpan(
-                              style: TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white),
-                              text: '1000'),
-                        ])),
+                      TextSpan(
+                          style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white),
+                          text: '${plants[card.index].totalAmount}'),
+                    ])),
               ),
               SizedBox(width: 5.0),
             ],
@@ -392,18 +386,16 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: _dark_theme
-            ? Color.fromRGBO(8, 33, 38, 1)
-            : CupertinoColors.extraLightBackgroundGray,
-        drawer: Drawer(),
-        //appBar: _buildAppBar(),
-        body: _buildBody(),
-        //bottomNavigationBar: _buildBottomNavigationBar(context),
+      backgroundColor: _dark_theme
+          ? Color.fromRGBO(8, 33, 38, 1)
+          : CupertinoColors.extraLightBackgroundGray,
+      drawer: Drawer(),
+      //appBar: _buildAppBar(),
+      body: _buildBody(),
+      //bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 }
-
-
 
 class MySliverAppBar extends SliverPersistentHeaderDelegate {
   MySliverAppBar({@required this.expandedHeight});
@@ -420,8 +412,8 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset,
-      bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Stack(
       fit: StackFit.expand,
       overflow: Overflow.visible,
@@ -445,20 +437,14 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
         ),
         Positioned(
           top: expandedHeight / 2 - shrinkOffset,
-          left: MediaQuery
-              .of(context)
-              .size
-              .width / 4,
+          left: MediaQuery.of(context).size.width / 4,
           child: Opacity(
             opacity: (1 - shrinkOffset / expandedHeight),
             child: Card(
               elevation: 10,
               child: SizedBox(
                 height: expandedHeight,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width / 2,
+                width: MediaQuery.of(context).size.width / 2,
                 child: FlutterLogo(),
               ),
             ),

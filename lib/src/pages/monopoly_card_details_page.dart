@@ -36,6 +36,7 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
 
   Key _actionKey;
   Key _allClearKey = Key('allclear');
+  Key _blueCardKey = Key('blueCardKey');
   bool _button_status = false;
   Key _clearKey = Key('clear');
   List _currentValues = List();
@@ -45,21 +46,20 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
   Key _equalsKey = Key('equals');
   Key _fiveKey = Key('five');
   Key _fourKey = Key('four');
+  Key _greenCardKey = Key('greenCardKey');
   Key _minusKey = Key('minus');
   Key _multiplyKey = Key('multiply');
   Key _nineKey = Key('nine');
   Key _oneKey = Key('one');
   Key _plusKey = Key('plus');
+  Key _redCardKey = Key('redCardKey');
   Key _sevenKey = Key('seven');
   Key _sixKey = Key('six');
+  TextEditingController _textEditingController;
   Key _threeKey = Key('three');
   Key _twoKey = Key('two');
-  Key _zeroKey = Key('zero');
-  Key _redCardKey = Key('redCardKey');
-  Key _blueCardKey = Key('blueCardKey');
-  Key _greenCardKey = Key('greenCardKey');
   Key _yellowCardKey = Key('yellowCardKey');
-  TextEditingController _textEditingController;
+  Key _zeroKey = Key('zero');
 
   void initState() {
     super.initState();
@@ -211,7 +211,8 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
                                       color: Colors.white),
                                   children: <InlineSpan>[
                                     TextSpan(
-                                        text: ' ${widget.plants[widget.card.index].totalAmount.toDouble()}'),
+                                        text:
+                                            ' ${widget.plants[widget.card.index].totalAmount.toDouble()}'),
                                     WidgetSpan(
                                       alignment: PlaceholderAlignment.top,
                                       child: Text("M",
@@ -244,7 +245,6 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
   }
 
   void onKeyTapped(Key key) {
-
     if (savedLastValue == false && lastValue != null) {
       _currentValues.clear();
       savedLastValue = true;
@@ -253,43 +253,43 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
       if (identical(_sevenKey, key)) {
         _currentValues.add('7');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_eightKey, key)) {
+      } else if (identical(_eightKey, key)) {
         _currentValues.add('8');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_nineKey, key)) {
+      } else if (identical(_nineKey, key)) {
         _currentValues.add('9');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_fourKey, key)) {
+      } else if (identical(_fourKey, key)) {
         _currentValues.add('4');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_fiveKey, key)) {
+      } else if (identical(_fiveKey, key)) {
         _currentValues.add('5');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_sixKey, key)) {
+      } else if (identical(_sixKey, key)) {
         _currentValues.add('6');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_oneKey, key)) {
+      } else if (identical(_oneKey, key)) {
         _currentValues.add('1');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_twoKey, key)) {
+      } else if (identical(_twoKey, key)) {
         _currentValues.add('2');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_threeKey, key)) {
+      } else if (identical(_threeKey, key)) {
         _currentValues.add('3');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_dotKey, key)) {
+      } else if (identical(_dotKey, key)) {
         if (!_currentValues.contains('.')) {
           _currentValues.add('.');
         }
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_zeroKey, key)) {
+      } else if (identical(_zeroKey, key)) {
         _currentValues.add('0');
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_clearKey, key)) {
+      } else if (identical(_clearKey, key)) {
         print('Values :: $_currentValues');
         _currentValues.removeLast();
         _textEditingController.text = convertToString(_currentValues);
-      } else if(identical(_allClearKey, key)) {
+      } else if (identical(_allClearKey, key)) {
         _currentValues.clear();
         lastValue = null;
         savedLastValue = false;
@@ -303,13 +303,13 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         _currentValues.add('15000');
         calculateValue();
         savedLastValue = false;
-      }else if (identical(_blueCardKey, key)) {
+      } else if (identical(_blueCardKey, key)) {
         calculateValue();
         savedLastValue = false;
-      }else if (identical(_greenCardKey, key)) {
+      } else if (identical(_greenCardKey, key)) {
         calculateValue();
         savedLastValue = false;
-      }else if (identical(_yellowCardKey, key)) {
+      } else if (identical(_yellowCardKey, key)) {
         calculateValue();
         savedLastValue = false;
       }
@@ -329,8 +329,9 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
   void calculateValue() {
     String value;
     double doubleValue;
-    if (identical(_actionKey, _plusKey)){
-      doubleValue = Math.add(lastValue, double.parse(convertToString(_currentValues)));
+    if (identical(_actionKey, _plusKey)) {
+      doubleValue =
+          Math.add(lastValue, double.parse(convertToString(_currentValues)));
       value = validateDouble(doubleValue);
       print('Value after conversion : $value');
       _currentValues.clear();
@@ -340,7 +341,8 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         _textEditingController.text = value;
       });
     } else if (identical(_actionKey, _minusKey)) {
-      doubleValue = Math.subtract(lastValue, double.parse(convertToString(_currentValues)));
+      doubleValue = Math.subtract(
+          lastValue, double.parse(convertToString(_currentValues)));
       value = validateDouble(doubleValue);
       _currentValues.clear();
       _currentValues = convertToList(value);
@@ -349,7 +351,8 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         _textEditingController.text = value;
       });
     } else if (identical(_actionKey, _multiplyKey)) {
-      doubleValue = Math.multiply(lastValue, double.parse(convertToString(_currentValues)));
+      doubleValue = Math.multiply(
+          lastValue, double.parse(convertToString(_currentValues)));
       value = validateDouble(doubleValue);
       _currentValues.clear();
       _currentValues = convertToList(value);
@@ -358,7 +361,8 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         _textEditingController.text = value;
       });
     } else if (identical(_actionKey, _divideKey)) {
-      doubleValue = Math.divide(lastValue, double.parse(convertToString(_currentValues)));
+      doubleValue =
+          Math.divide(lastValue, double.parse(convertToString(_currentValues)));
       value = validateDouble(doubleValue);
       _currentValues.clear();
       _currentValues = convertToList(value);
@@ -372,15 +376,15 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
   String convertToString(List values) {
     String val = '';
     print(_currentValues);
-    for (int i = 0;i < values.length;i++) {
-      val+=_currentValues[i];
+    for (int i = 0; i < values.length; i++) {
+      val += _currentValues[i];
     }
     return val;
   }
 
   List convertToList(String value) {
     List list = new List();
-    for(int i = 0;i < value.length;i++) {
+    for (int i = 0; i < value.length; i++) {
       list.add(String.fromCharCode(value.codeUnitAt(i)));
     }
     return list;
@@ -403,60 +407,56 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
     );
   }
 
-  Widget _buildPayCard(List<Plant> plants, int cardIndex, Key cardKey){
+  Widget _buildPayCard(List<Plant> plants, int cardIndex, Key cardKey) {
     return KeyItem(
-        key: cardKey,
-        onKeyTap: onKeyTapped,
+      key: cardKey,
+      onKeyTap: onKeyTapped,
       child: Container(
         color: Colors.white,
         padding: EdgeInsets.all(5),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(crossAxisAlignment: CrossAxisAlignment.center, children: <
-                  Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+            Widget>[
+          Row(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100.0),
+                  color: plants[cardIndex].color,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 1.0,
+                    ),
+                  ]),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
                       color: plants[cardIndex].color,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 1.0,
-                        ),
-                      ]),
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: plants[cardIndex].color,
-                        ),
-
-                        height: 75.0,
-                        width: 75.0,
-                      )
-                    ],
-                  ),
-                ),
-              ]
+                    ),
+                    height: 75.0,
+                    width: 75.0,
+                  )
+                ],
               ),
-              Row(crossAxisAlignment: CrossAxisAlignment.center, children: <
-                  Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(15, 2, 0, 0),
-                  child : RichText(
-                      text: TextSpan(
-                        // set the default style for the children TextSpans
-                          children: [
-                            TextSpan(
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w100,
-                                    color: Colors.black),
-                                children: <InlineSpan>[
-                                  TextSpan(
-                                      text: '${widget.plants[cardIndex].name}'),//' ${widget.plants[cardIndex].name}'),
+            ),
+          ]),
+          Row(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 2, 0, 0),
+              child: RichText(
+                  text: TextSpan(
+                      // set the default style for the children TextSpans
+                      children: [
+                    TextSpan(
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w100,
+                            color: Colors.black),
+                        children: <InlineSpan>[
+                          TextSpan(
+                              text:
+                                  '${widget.plants[cardIndex].name}'), //' ${widget.plants[cardIndex].name}'),
 //                                WidgetSpan(
 //                                  //padding: EdgeInsets.all(8.0),
 //                                  alignment: PlaceholderAlignment.middle,
@@ -466,15 +466,12 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
 //                                          fontWeight: FontWeight.normal,
 //                                          color: Colors.grey)),
 //                                ),
-                                ]),
-                          ])),
-                ),
-              ]
-              ),
-            ]
-        ),
+                        ]),
+                  ])),
+            ),
+          ]),
+        ]),
       ),
-
     );
   }
 
@@ -489,36 +486,37 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(crossAxisAlignment: CrossAxisAlignment.center, children: <
-                Widget>[
-              Container(
-                alignment: Alignment.center,
-                width: width,
-                height: (height/300)*20,
-                child: IgnorePointer(
-                  child: TextField(
-                    enabled: true,
-                    autofocus: true,
-                    controller: _textEditingController,
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      fontFamily: 'Avenir',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey,
-                      fontSize: 60.0,
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    width: width,
+                    height: (height / 300) * 20,
+                    child: IgnorePointer(
+                      child: TextField(
+                        enabled: true,
+                        autofocus: true,
+                        controller: _textEditingController,
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontFamily: 'Avenir',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey,
+                          fontSize: 60.0,
+                        ),
+                        decoration: InputDecoration.collapsed(
+                            hintText: '0',
+                            hintStyle:
+                                TextStyle(color: Colors.grey, fontSize: 50.0)),
+                      ),
                     ),
-                    decoration: InputDecoration.collapsed(
-                        hintText: '0',
-                        hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 50.0
-                        )
-                    ),              ),
-                ),
-              ),
-            ]),
-            Divider(color: widget.plants[widget.card.index].color,),
+                  ),
+                ]),
+            Divider(
+              color: widget.plants[widget.card.index].color,
+            ),
 //            Row(
 //              children: <Widget>[
 //                buildActionButton('+', _plusKey),
@@ -527,67 +525,104 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
 //                buildActionButton('/', _equalsKey)
 //              ],
 //            ),
-              Container(
-                padding: EdgeInsets.all(10.0),
-                color: CupertinoColors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('7', _sevenKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('8',_eightKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('9',_nineKey, widget.plants[widget.card.index].color),
-                        ],
-                      ),
-                    //Divider(color: widget.plant.color,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('4',_fourKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('5',_fiveKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('6',_sixKey, widget.plants[widget.card.index].color),
-                        ],
-                      ),
-                    //Divider(color: widget.plant.color,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('1',_oneKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('2',_twoKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('3',_threeKey, widget.plants[widget.card.index].color),
-                        ],
-                      ),
-                    //Divider(color: widget.plant.color,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('.',_dotKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('0',_zeroKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('C',_allClearKey, widget.plants[widget.card.index].color),
-                        ],
-                      ),
-                    //Divider(color: widget.plants[widget.card.index].color,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('M',_allClearKey, widget.plants[widget.card.index].color),
-                          buildKeyItem('K',Key(''), widget.plants[widget.card.index].color),
-                          buildActionButton("Pay", _plusKey, widget.plants[widget.card.index].color),
-                        ],
-                      ),
-                  ],
-                ),
+            Container(
+              padding: EdgeInsets.all(10.0),
+              color: CupertinoColors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildKeyItem('7', _sevenKey,
+                          widget.plants[widget.card.index].color),
+                      buildKeyItem('8', _eightKey,
+                          widget.plants[widget.card.index].color),
+                      buildKeyItem('9', _nineKey,
+                          widget.plants[widget.card.index].color),
+                    ],
+                  ),
+                  //Divider(color: widget.plant.color,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildKeyItem('4', _fourKey,
+                          widget.plants[widget.card.index].color),
+                      buildKeyItem('5', _fiveKey,
+                          widget.plants[widget.card.index].color),
+                      buildKeyItem(
+                          '6', _sixKey, widget.plants[widget.card.index].color),
+                    ],
+                  ),
+                  //Divider(color: widget.plant.color,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildKeyItem(
+                          '1', _oneKey, widget.plants[widget.card.index].color),
+                      buildKeyItem(
+                          '2', _twoKey, widget.plants[widget.card.index].color),
+                      buildKeyItem('3', _threeKey,
+                          widget.plants[widget.card.index].color),
+                    ],
+                  ),
+                  //Divider(color: widget.plant.color,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildKeyItem(
+                          '.', _dotKey, widget.plants[widget.card.index].color),
+                      buildKeyItem('0', _zeroKey,
+                          widget.plants[widget.card.index].color),
+                      buildKeyItem('C', _allClearKey,
+                          widget.plants[widget.card.index].color),
+                    ],
+                  ),
+                  //Divider(color: widget.plants[widget.card.index].color,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildKeyItem('M', _allClearKey,
+                          widget.plants[widget.card.index].color),
+                      buildKeyItem(
+                          'K', Key(''), widget.plants[widget.card.index].color),
+                      buildActionButton("Pay", _plusKey,
+                          widget.plants[widget.card.index].color),
+                    ],
+                  ),
+                ],
               ),
-            Divider(color: widget.plants[widget.card.index].color,),
+            ),
+            Divider(
+              color: widget.plants[widget.card.index].color,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _buildPayCard(plants, (Monopoly.PLAYER_RED.index == widget.card.index)? 0 : Monopoly.PLAYER_RED.index, _redCardKey),
-                _buildPayCard(plants, (Monopoly.PLAYER_BLUE.index == widget.card.index)? 0 : Monopoly.PLAYER_BLUE.index, _blueCardKey),
-                _buildPayCard(plants, (Monopoly.PLAYER_GREEN.index == widget.card.index)? 0 : Monopoly.PLAYER_GREEN.index, _greenCardKey),
-                _buildPayCard(plants, (Monopoly.PLAYER_YELLOW.index == widget.card.index)? 0 : Monopoly.PLAYER_YELLOW.index, _yellowCardKey),
+                _buildPayCard(
+                    plants,
+                    (Monopoly.PLAYER_RED.index == widget.card.index)
+                        ? 0
+                        : Monopoly.PLAYER_RED.index,
+                    _redCardKey),
+                _buildPayCard(
+                    plants,
+                    (Monopoly.PLAYER_BLUE.index == widget.card.index)
+                        ? 0
+                        : Monopoly.PLAYER_BLUE.index,
+                    _blueCardKey),
+                _buildPayCard(
+                    plants,
+                    (Monopoly.PLAYER_GREEN.index == widget.card.index)
+                        ? 0
+                        : Monopoly.PLAYER_GREEN.index,
+                    _greenCardKey),
+                _buildPayCard(
+                    plants,
+                    (Monopoly.PLAYER_YELLOW.index == widget.card.index)
+                        ? 0
+                        : Monopoly.PLAYER_YELLOW.index,
+                    _yellowCardKey),
               ],
             ),
             SizedBox(height: 10.0),
@@ -595,10 +630,9 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         ),
       ),
     );
-
   }
 
-  ActionButton buildActionButton(String name , Key key, Color color) {
+  ActionButton buildActionButton(String name, Key key, Color color) {
     return ActionButton(
       key: key,
       actionName: name,
@@ -655,7 +689,14 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
 }
 
 class ActionButton extends StatelessWidget {
-  ActionButton({@required this.actionName,this.onTapped,this.enabled,this.key,this.padding, this.changedBackground}) : super(key : key);
+  ActionButton(
+      {@required this.actionName,
+      this.onTapped,
+      this.enabled,
+      this.key,
+      this.padding,
+      this.changedBackground})
+      : super(key: key);
 
   final String actionName;
   final Color changedBackground;
@@ -687,8 +728,7 @@ class ActionButton extends StatelessWidget {
                   color: enabled ? changedForeground : defaultForeground,
                   fontSize: 25.0,
                   fontFamily: 'Avenir',
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
             ),
           ),
         ),
@@ -698,12 +738,12 @@ class ActionButton extends StatelessWidget {
 }
 
 class KeyItem extends StatelessWidget {
-  KeyItem({@required this.child,this.key,this.onKeyTap, this.color});
+  KeyItem({@required this.child, this.key, this.onKeyTap, this.color});
 
   final Widget child;
+  final Color color;
   final Key key;
   final KeyCallBack onKeyTap;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -728,18 +768,18 @@ class KeyItem extends StatelessWidget {
 
 class Math {
   static double add(double val1, val2) {
-    return val1+val2;
+    return val1 + val2;
   }
 
-  static double subtract(double val1,val2) {
+  static double subtract(double val1, val2) {
     return val1 - val2;
   }
 
   static double multiply(double val1, double val2) {
-    return val1*val2;
+    return val1 * val2;
   }
 
   static double divide(double val1, double val2) {
-    return val1/val2;
+    return val1 / val2;
   }
 }
