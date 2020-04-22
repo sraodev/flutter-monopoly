@@ -2,27 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoly/colors.dart' as AppColors;
 import 'package:monopoly/src/utils/currency_formater_helper.dart';
-import 'package:monopoly/src/models/plant.dart';
+import 'package:monopoly/src/models/monopoly.dart';
 import 'package:monopoly/src/pages/home_page.dart';
-import 'package:monopoly/src/widgets/custom_icons_icons.dart';
 
-class PlantsList extends StatefulWidget {
-  PlantsList(
-    this.plants,
+class MonopolyList extends StatefulWidget {
+  MonopolyList(
+    this.monopoly,
     this.scrollController,
     this.showIndex,
   );
 
-  final List<Plant> plants;
+  final List<Monopoly> monopoly;
   final ScrollController scrollController;
   final int showIndex;
 
   @override
-  _PlantsListState createState() => _PlantsListState();
+  _MonopolyListState createState() => _MonopolyListState();
 }
 
-class _PlantsListState extends State<PlantsList> {
-  Widget _buildPlantCard(Plant plant, int index) {
+class _MonopolyListState extends State<MonopolyList> {
+  Widget _buildPlantCard(Monopoly monopoly, int index) {
     return Container(
       padding: EdgeInsets.only(right: 15.0, bottom: 15),
       child: GestureDetector(
@@ -51,7 +50,7 @@ class _PlantsListState extends State<PlantsList> {
               ),
               //_buildImage(plant.image),
               //_buildPrice(plant.price),
-              _buildInfo(plant),
+              _buildInfo(monopoly),
             ],
           ),
         ),
@@ -123,7 +122,7 @@ class _PlantsListState extends State<PlantsList> {
     );
   }
 
-  Widget _buildInfo(Plant plant) {
+  Widget _buildInfo(Monopoly plant) {
     return Positioned(
       top: 10.0,
       left: 20.0,
@@ -168,7 +167,7 @@ class _PlantsListState extends State<PlantsList> {
 //                  borderRadius: BorderRadius.circular(5.0),
 //                ),
                 child: Icon(
-                  CustomIcons.droplet,
+                  Icons.add,
                   color: Colors.lightGreenAccent,
                   size: 23.0,
                 ),
@@ -195,7 +194,7 @@ class _PlantsListState extends State<PlantsList> {
                   height: 35.0,
                   width: 35.0,
                   child: Icon(
-                    CustomIcons.soil_moisture,
+                    Icons.add,
                     color: Colors.lightGreenAccent,
                     size: 23.0,
                   ),
@@ -247,9 +246,9 @@ class _PlantsListState extends State<PlantsList> {
         padding: EdgeInsets.only(left: 10.0),
         scrollDirection: Axis.vertical,
         itemBuilder: (_, int index) {
-          return _buildPlantCard(widget.plants[index], index);
+          return _buildPlantCard(widget.monopoly[index], index);
         },
-        itemCount: widget.plants.length,
+        itemCount: widget.monopoly.length,
       ),
     );
   }

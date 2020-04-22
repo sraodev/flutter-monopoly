@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-class Plant {
-  Plant({
+class Monopoly {
+  Monopoly({
     this.name,
     this.color,
     this.type,

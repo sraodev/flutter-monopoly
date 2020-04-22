@@ -9,14 +9,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:monopoly/colors.dart' as AppColors;
 import 'package:monopoly/main.dart';
-import 'package:monopoly/src/models/plant.dart';
+import 'package:monopoly/src/models/monopoly.dart';
 import 'package:monopoly/src/pages/monopoly_card_details_page.dart';
 import 'package:monopoly/src/widgets/description_widget.dart';
 import 'package:monopoly/src/widgets/monopoly_icon_icons.dart';
 import 'package:monopoly/src/utils/currency_formater_helper.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-enum Monopoly { BANKER, PLAYER_RED, PLAYER_GREEN, PLAYER_BLUE, PLAYER_YELLOW }
+enum MonopolyCard { BANKER, PLAYER_RED, PLAYER_GREEN, PLAYER_BLUE, PLAYER_YELLOW }
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,9 +36,9 @@ class _HomePageState extends State<HomePage>
     HomePage(),
   ];
 
-  List<List<Plant>> plantGroups = [];
-  List<Plant> plants = [
-    Plant(
+  List<List<Monopoly>> plantGroups = [];
+  List<Monopoly> plants = [
+    Monopoly(
         name: 'Bank',
         color: AppColors.mainColor,
         type: ['Outdoor'],
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage>
         waterTankLevel: 10,
         wateringTime: 30,
         alerts: 'Please fill the water tank'),
-    Plant(
+    Monopoly(
         name: 'Player 1',
         color: Colors.red[900],
         type: ['Outdoor', 'Indoor'],
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage>
         waterTankLevel: 10,
         wateringTime: 30,
         alerts: 'This plant need water'),
-    Plant(
+    Monopoly(
         name: 'Player 2',
         color: Colors.green[900],
         type: ['Indoor'],
@@ -87,12 +87,12 @@ class _HomePageState extends State<HomePage>
             'Strelitzia alba is a herbaceous plant of the Bird of Paradise family and is endemic to the Garden Route along the southernmost coastal regions of the Eastern and Western Cape in South Africa. The Swedish botanist Thunberg, who in 1792 described and published it in Nov. Gen. Pl.: 113 as Strelitzia augusta, first found it in the neighbourhood of the Piesang River at Plettenberg Bay – \'piesang\' being Afrikaans for \'banana\'. Francis Masson, who was then the Botanical Collector for Kew, introduced it to Europe in 1791. This is one of three arborescent Strelitzias, the other two being Strelitzia caudata and Strelitzia nicolai.',
         temperature: 20,
         light: 80,
-        totalAmount: 150000,
+        totalAmount: 15000000,
         soilMoisture: 80,
         waterTankLevel: 10,
         wateringTime: 30,
         alerts: 'Next watering in 1 day (every 7 days)'),
-    Plant(
+    Monopoly(
         name: 'Player 3',
         color: Colors.blue[900],
         type: ['Indoor', 'Outdoor'],
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage>
         waterTankLevel: 10,
         wateringTime: 30,
         alerts: 'Please fill the water tank'),
-    Plant(
+    Monopoly(
         name: 'Player 4',
         color: Colors.yellow[700],
         type: ['Indoor', 'Outdoor'],
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage>
               ],
             ),
           ),
-          _buildMonopolyCard(plants, Monopoly.BANKER),
+          _buildMonopolyCard(plants, MonopolyCard.BANKER),
           Divider(),
           Container(
             padding: EdgeInsets.only(left: 15.0, bottom: 10),
@@ -191,14 +191,14 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           // _buildRedPlayer(),
-          _buildMonopolyCard(plants, Monopoly.PLAYER_RED),
+          _buildMonopolyCard(plants, MonopolyCard.PLAYER_RED),
           SizedBox(height: 10.0),
           //_buildGreenPlayer(),
-          _buildMonopolyCard(plants, Monopoly.PLAYER_GREEN),
+          _buildMonopolyCard(plants, MonopolyCard.PLAYER_GREEN),
           SizedBox(height: 10.0),
-          _buildMonopolyCard(plants, Monopoly.PLAYER_BLUE),
+          _buildMonopolyCard(plants, MonopolyCard.PLAYER_BLUE),
           SizedBox(height: 10.0),
-          _buildMonopolyCard(plants, Monopoly.PLAYER_YELLOW),
+          _buildMonopolyCard(plants, MonopolyCard.PLAYER_YELLOW),
           //_buildYellowPlayer(),
         ],
       ),
@@ -234,7 +234,7 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  Widget _buildMonopolyCard(List<Plant> plants, Monopoly card) {
+  Widget _buildMonopolyCard(List<Monopoly> plants, MonopolyCard card) {
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10.0, bottom: 10),
       child: GestureDetector(
@@ -306,7 +306,7 @@ class _HomePageState extends State<HomePage>
     isLoading = true;
   }
 
-  Widget _buildInfo(List<Plant> plant, Monopoly card) {
+  Widget _buildInfo(List<Monopoly> plant, MonopolyCard card) {
     return Positioned(
       top: 10.0,
       left: 20.0,
@@ -319,7 +319,7 @@ class _HomePageState extends State<HomePage>
             style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.white.withOpacity(0.8),
             ),
           ),
           SizedBox(height: 10.0),
@@ -328,7 +328,7 @@ class _HomePageState extends State<HomePage>
               Container(
                 child: Icon(
                   MonopolyIcon.dollar,
-                  color: Colors.white,
+                  color: Colors.white38,
                   size: 33.0,
                 ),
               ),
