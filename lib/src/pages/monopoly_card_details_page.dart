@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:monopoly/src/utils/constants.dart';
+import 'package:monopoly/src/utils/currency_formater_helper.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoly/colors.dart' as AppColors;
@@ -11,6 +13,12 @@ import 'package:monopoly/src/widgets/description_widget.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:monopoly/src/widgets/monopoly_icon_icons.dart';
 
+import '../utils/constants.dart';
+import '../utils/constants.dart';
+import '../utils/currency_formater_helper.dart';
+import '../utils/currency_formater_helper.dart';
+import '../utils/currency_formater_helper.dart';
+import '../utils/currency_formater_helper.dart';
 import 'home_page.dart';
 
 
@@ -19,8 +27,6 @@ typedef KeyCallBack = void Function(Key key, int index);
 
 const Color primaryColor = const Color(0xff50E3C2);
 const Color keypadColor = const Color(0xff4A4A4A);
-const double MILLION = 1000000;
-const double KILO = 1000;
 
 class MonopolyCardDetailPage extends StatefulWidget {
   MonopolyCardDetailPage(this.plants, this.card);
@@ -219,16 +225,7 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
                                       color: Colors.white),
                                   children: <InlineSpan>[
                                     TextSpan(
-                                        text:
-                                            ' ${widget.plants[widget.card.index].totalAmount.toDouble()}'),
-                                    WidgetSpan(
-                                      alignment: PlaceholderAlignment.top,
-                                      child: Text("M",
-                                          style: TextStyle(
-                                              fontSize: 45,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.white38)),
-                                    ),
+                                        text: CurrencyFormater.withSuffix(widget.plants[widget.card.index].totalAmount)),
                                   ]),
                             ])),
                       ]),
@@ -307,15 +304,27 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
         calculateValue(Monopoly.BANKER.index);
         savedLastValue = false;
       } else if (identical(_kiloKey, key)) {
-        _currentValues.clear();
-        _currentValues.add(KILO.toString());
-        calculateValue(cardIndex);
-        savedLastValue = false;
+          double doubleValue = Math.multiply(
+              Constants.KILO, double.parse(convertToString(_currentValues)));
+          String value = validateDouble(doubleValue);
+          _currentValues.clear();
+          _currentValues = convertToList(value);
+          _actionKey = null;
+          setState(() {
+            _textEditingController.text = CurrencyFormater.withSuffix(doubleValue);
+          });
+
       } else if (identical(_millionKey, key)) {
+        double doubleValue = Math.multiply(
+            Constants.MILLION, double.parse(convertToString(_currentValues)));
+        String value = validateDouble(doubleValue);
         _currentValues.clear();
-        _currentValues.add(MILLION.toString());
-        calculateValue(cardIndex);
-        savedLastValue = false;
+        _currentValues = convertToList(value);
+        _actionKey = null;
+        setState(() {
+          _textEditingController.text = CurrencyFormater.withSuffix(doubleValue);
+        });
+
       } else if (identical(_redCardKey, key)) {
         _currentValues.clear();
         _currentValues.add('${widget.plants[cardIndex].totalAmount}');
@@ -393,19 +402,20 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
       _actionKey = null;
       setState(() {
         widget.plants[cardIndex].totalAmount = doubleValue;
-        _textEditingController.text = value;
+        _textEditingController.text = CurrencyFormater.withSuffix(doubleValue);
       });
     } else if (identical(_actionKey, _minusKey)) {
       if (lastValue.toInt() <= double.parse(convertToString(_currentValues)).toInt()){
         doubleValue = Math.subtract(
              double.parse(convertToString(_currentValues)), lastValue,);
         value = validateDouble(doubleValue);
+        print('Value after conversion : $value');
         _currentValues.clear();
         _currentValues = convertToList(value);
         _actionKey = null;
         setState(() {
           widget.plants[cardIndex].totalAmount = doubleValue;
-          _textEditingController.text = value;
+          _textEditingController.text = CurrencyFormater.withSuffix(doubleValue);
         });
       }else{
       setState(() {
@@ -420,7 +430,7 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
       _currentValues = convertToList(value);
       _actionKey = null;
       setState(() {
-        _textEditingController.text = value;
+        _textEditingController.text = CurrencyFormater.withSuffix(doubleValue);
       });
     } else if (identical(_actionKey, _divideKey)) {
       doubleValue =
@@ -436,15 +446,6 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
   }
 
   String convertToString(List values) {
-    String val = '';
-    print(_currentValues);
-    for (int i = 0; i < values.length; i++) {
-      val += _currentValues[i];
-    }
-    return val;
-  }
-
-  String convertToMillion(List values) {
     String val = '';
     print(_currentValues);
     for (int i = 0; i < values.length; i++) {
@@ -590,14 +591,6 @@ class _MonopolyCardDetailPageState extends State<MonopolyCardDetailPage> {
             Divider(
               color: widget.plants[widget.card.index].color,
             ),
-//            Row(
-//              children: <Widget>[
-//                buildActionButton('+', _plusKey),
-//                buildActionButton('-', _minusKey),
-//                buildActionButton('x', _multiplyKey),
-//                buildActionButton('/', _equalsKey)
-//              ],
-//            ),
             Container(
               padding: EdgeInsets.all(10.0),
               color: CupertinoColors.white,

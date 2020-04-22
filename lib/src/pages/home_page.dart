@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:monopoly/src/widgets/plantify_bottom_app_bar.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -14,6 +13,7 @@ import 'package:monopoly/src/models/plant.dart';
 import 'package:monopoly/src/pages/monopoly_card_details_page.dart';
 import 'package:monopoly/src/widgets/description_widget.dart';
 import 'package:monopoly/src/widgets/monopoly_icon_icons.dart';
+import 'package:monopoly/src/utils/currency_formater_helper.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 enum Monopoly { BANKER, PLAYER_RED, PLAYER_GREEN, PLAYER_BLUE, PLAYER_YELLOW }
@@ -51,13 +51,13 @@ class _HomePageState extends State<HomePage>
             'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
         temperature: 20,
         light: 80,
-        totalAmount: 15.000,
+        totalAmount: 15000000,
         soilMoisture: 60,
         waterTankLevel: 10,
         wateringTime: 30,
         alerts: 'Please fill the water tank'),
     Plant(
-        name: 'Aravind',
+        name: 'Player 1',
         color: Colors.red[900],
         type: ['Outdoor', 'Indoor'],
         top: true,
@@ -69,13 +69,13 @@ class _HomePageState extends State<HomePage>
             'Monstera deliciosa, the ceriman, is a species of flowering plant native to tropical forests of southern Mexico, south to Panama. It has been introduced to many tropical areas, and has become a mildly invasive species in Hawaii, Seychelles, Ascension Island and the Society Islands.',
         temperature: 20,
         light: 80,
-        totalAmount: 15.000,
+        totalAmount: 15000000,
         soilMoisture: 60,
         waterTankLevel: 10,
         wateringTime: 30,
         alerts: 'This plant need water'),
     Plant(
-        name: 'Srinivas',
+        name: 'Player 2',
         color: Colors.green[900],
         type: ['Indoor'],
         top: true,
@@ -87,13 +87,13 @@ class _HomePageState extends State<HomePage>
             'Strelitzia alba is a herbaceous plant of the Bird of Paradise family and is endemic to the Garden Route along the southernmost coastal regions of the Eastern and Western Cape in South Africa. The Swedish botanist Thunberg, who in 1792 described and published it in Nov. Gen. Pl.: 113 as Strelitzia augusta, first found it in the neighbourhood of the Piesang River at Plettenberg Bay – \'piesang\' being Afrikaans for \'banana\'. Francis Masson, who was then the Botanical Collector for Kew, introduced it to Europe in 1791. This is one of three arborescent Strelitzias, the other two being Strelitzia caudata and Strelitzia nicolai.',
         temperature: 20,
         light: 80,
-        totalAmount: 15.000,
+        totalAmount: 150000,
         soilMoisture: 80,
         waterTankLevel: 10,
         wateringTime: 30,
         alerts: 'Next watering in 1 day (every 7 days)'),
     Plant(
-        name: 'Sirisha',
+        name: 'Player 3',
         color: Colors.blue[900],
         type: ['Indoor', 'Outdoor'],
         top: true,
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage>
             'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
         temperature: 20,
         light: 80,
-        totalAmount: 15.000,
+        totalAmount: 15000000,
         soilMoisture: 60,
         waterTankLevel: 10,
         wateringTime: 30,
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage>
             'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
         temperature: 20,
         light: 80,
-        totalAmount: 15.000,
+        totalAmount: 15000000,
         soilMoisture: 60,
         waterTankLevel: 10,
         wateringTime: 30,
@@ -342,7 +342,7 @@ class _HomePageState extends State<HomePage>
                               fontSize: 40,
                               fontWeight: FontWeight.w100,
                               color: Colors.white),
-                          text: '${plants[card.index].totalAmount}'),
+                          text: CurrencyFormater.withSuffix(plants[card.index].totalAmount)),
                     ])),
               ),
               SizedBox(width: 5.0),
