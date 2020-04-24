@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+enum MonopolyCard { BANKER, PLAYER_RED, PLAYER_GREEN, PLAYER_BLUE, PLAYER_YELLOW }
+
 class Monopoly {
   Monopoly({
     this.name,
@@ -25,7 +28,7 @@ class Monopoly {
   String image;
   double light;
   String name;
-  Color color;
+  List<Color> color;
   bool plantOfTheMonth;
   double price;
   String size;

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +10,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:monopoly/colors.dart' as AppColors;
 import 'package:monopoly/main.dart';
-import 'package:monopoly/src/models/monopoly.dart';
-import 'package:monopoly/src/pages/monopoly_card_details_page.dart';
-import 'package:monopoly/src/widgets/description_widget.dart';
-import 'package:monopoly/src/widgets/monopoly_icon_icons.dart';
-import 'package:monopoly/src/utils/currency_formater_helper.dart';
+import 'package:monopoly/src/models/models.dart';
+import 'package:monopoly/src/pages/monopoly_details_page.dart';
+import 'package:monopoly/src/widgets/widgets.dart';
+import 'package:monopoly/src/utils/utils.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-enum MonopolyCard { BANKER, PLAYER_RED, PLAYER_GREEN, PLAYER_BLUE, PLAYER_YELLOW }
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,10 +37,15 @@ class _HomePageState extends State<HomePage>
   ];
 
   List<List<Monopoly>> plantGroups = [];
-  List<Monopoly> plants = [
+  List<Monopoly> monopoly = [
     Monopoly(
         name: 'Bank',
-        color: AppColors.mainColor,
+        color: [
+          Colors.grey[900],
+          Colors.grey[700],
+          Colors.grey[400],
+          Colors.grey[200],
+        ],
         type: ['Outdoor'],
         top: true,
         plantOfTheMonth: true,
@@ -58,7 +63,12 @@ class _HomePageState extends State<HomePage>
         alerts: 'Please fill the water tank'),
     Monopoly(
         name: 'Player 1',
-        color: Colors.red[900],
+        color: [
+          Colors.red[900],
+          Colors.red[700],
+          Colors.red[400],
+          Colors.red[200],
+        ],
         type: ['Outdoor', 'Indoor'],
         top: true,
         plantOfTheMonth: false,
@@ -76,7 +86,12 @@ class _HomePageState extends State<HomePage>
         alerts: 'This plant need water'),
     Monopoly(
         name: 'Player 2',
-        color: Colors.green[900],
+        color: [
+          Colors.green[900],
+          Colors.green[700],
+          Colors.green[400],
+          Colors.green[200],
+        ],
         type: ['Indoor'],
         top: true,
         plantOfTheMonth: true,
@@ -94,7 +109,12 @@ class _HomePageState extends State<HomePage>
         alerts: 'Next watering in 1 day (every 7 days)'),
     Monopoly(
         name: 'Player 3',
-        color: Colors.blue[900],
+        color: [
+          Colors.blue[900],
+          Colors.blue[700],
+          Colors.blue[400],
+          Colors.blue[200],
+        ],
         type: ['Indoor', 'Outdoor'],
         top: true,
         plantOfTheMonth: true,
@@ -112,7 +132,12 @@ class _HomePageState extends State<HomePage>
         alerts: 'Please fill the water tank'),
     Monopoly(
         name: 'Player 4',
-        color: Colors.yellow[700],
+        color: [
+          Colors.yellow[900],
+          Colors.yellow[700],
+          Colors.yellow[400],
+          Colors.yellow[200],
+        ],
         type: ['Indoor', 'Outdoor'],
         top: true,
         plantOfTheMonth: true,
@@ -152,54 +177,47 @@ class _HomePageState extends State<HomePage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildHeader(),
-          Container(
-            padding: EdgeInsets.only(left: 15.0, bottom: 10),
-            child: Row(
-              children: <Widget>[
-                RichText(
-                    text: TextSpan(
-                        // set the default style for the children TextSpans
-                        children: [
-                      TextSpan(
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w300,
-                              color: AppColors.mainColor),
-                          text: 'Bank'),
-                    ])),
-              ],
-            ),
-          ),
-          _buildMonopolyCard(plants, MonopolyCard.BANKER),
-          Divider(),
-          Container(
-            padding: EdgeInsets.only(left: 15.0, bottom: 10),
-            child: Row(
-              children: <Widget>[
-                RichText(
-                    text: TextSpan(
-                        // set the default style for the children TextSpans
-                        children: [
-                      TextSpan(
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w300,
-                              color: AppColors.mainColor),
-                          text: 'Players'),
-                    ])),
-              ],
-            ),
-          ),
-          // _buildRedPlayer(),
-          _buildMonopolyCard(plants, MonopolyCard.PLAYER_RED),
-          SizedBox(height: 10.0),
-          //_buildGreenPlayer(),
-          _buildMonopolyCard(plants, MonopolyCard.PLAYER_GREEN),
-          SizedBox(height: 10.0),
-          _buildMonopolyCard(plants, MonopolyCard.PLAYER_BLUE),
-          SizedBox(height: 10.0),
-          _buildMonopolyCard(plants, MonopolyCard.PLAYER_YELLOW),
-          //_buildYellowPlayer(),
+//          Container(
+//            padding: EdgeInsets.only(left: 15.0, bottom: 5),
+//            child: Row(
+//              children: <Widget>[
+//                RichText(
+//                    text: TextSpan(
+//                        // set the default style for the children TextSpans
+//                        children: [
+//                      TextSpan(
+//                          style: TextStyle(
+//                              fontSize: 20,
+//                              fontWeight: FontWeight.w300,
+//                              color: AppColors.mainColor),
+//                          text: 'Bank'),
+//                    ])),
+//              ],
+//            ),
+//          ),
+          CreditCardContainer(model: monopoly, card: MonopolyCard.BANKER),
+//          Container(
+//            padding: EdgeInsets.only(left: 15.0, bottom: 5),
+//            child: Row(
+//              children: <Widget>[
+//                RichText(
+//                    text: TextSpan(
+//                        // set the default style for the children TextSpans
+//                        children: [
+//                      TextSpan(
+//                          style: TextStyle(
+//                              fontSize: 20,
+//                              fontWeight: FontWeight.w300,
+//                              color: AppColors.mainColor),
+//                          text: 'Players'),
+//                    ])),
+//              ],
+//            ),
+//          ),
+          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_RED),
+          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_GREEN),
+          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_BLUE),
+          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_YELLOW),
         ],
       ),
     );
@@ -241,7 +259,7 @@ class _HomePageState extends State<HomePage>
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: plants[card.index].color,
+              color: plants[card.index].color[0],
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey,
@@ -289,12 +307,12 @@ class _HomePageState extends State<HomePage>
 
   @override
   initState() {
-    plantGroups.add(plants.where((p) => p.top == true).toList());
+    plantGroups.add(monopoly.where((p) => p.top == true).toList());
     plantGroups
-        .add(plants.where((p) => p.type.indexOf('Outdoor') != -1).toList());
+        .add(monopoly.where((p) => p.type.indexOf('Outdoor') != -1).toList());
     plantGroups
-        .add(plants.where((p) => p.type.indexOf('Indoor') != -1).toList());
-    plantGroups.add(plants.where((p) => p.plantOfTheMonth == true).toList());
+        .add(monopoly.where((p) => p.type.indexOf('Indoor') != -1).toList());
+    plantGroups.add(monopoly.where((p) => p.plantOfTheMonth == true).toList());
 
     tabController = TabController(vsync: this, length: 4);
     scrollController = ScrollController();
@@ -342,7 +360,7 @@ class _HomePageState extends State<HomePage>
                               fontSize: 40,
                               fontWeight: FontWeight.w100,
                               color: Colors.white),
-                          text: CurrencyFormater.withSuffix(plants[card.index].totalAmount)),
+                          text: CurrencyFormater.withSuffix(monopoly[card.index].totalAmount)),
                     ])),
               ),
               SizedBox(width: 5.0),
