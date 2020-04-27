@@ -72,13 +72,12 @@ flutter:
    - assets/images/icon_plant.png
    - assets/images/icon_add.png
    - assets/images/icon_user.png
-   - assets/images/weather/clear.png
-   - assets/images/weather/snow.png
-   - assets/images/weather/cloudy.png
-   - assets/images/weather/rainy.png
-   - assets/images/weather/thunderstorm.png
-   - assets/images/weather/clear.png
+   - assets/images/monopoly_logo.png
+   - assets/images/credit_card/money_symbol.png
    - assets/images/credit_card/chip.png
+   - assets/images/credit_card/nfc.png
+   - assets/images/credit_card/visa.png
+   - assets/images/credit_card/monopoly.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

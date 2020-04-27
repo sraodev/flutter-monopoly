@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage>
   List<List<Monopoly>> plantGroups = [];
   List<Monopoly> monopoly = [
     Monopoly(
-        name: 'Bank',
+        name: 'Banker',
         color: [
           Colors.grey[900],
           Colors.grey[700],
@@ -164,9 +164,6 @@ class _HomePageState extends State<HomePage>
   bool _dark_theme = false;
   int _groupIndex = 0;
   int _index = 0;
-  //  Current State of InnerDrawerState
-  final GlobalKey<InnerDrawerState> _innerDrawerKey =
-      GlobalKey<InnerDrawerState>();
 
   int _value = 0;
 
@@ -177,43 +174,7 @@ class _HomePageState extends State<HomePage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildHeader(),
-//          Container(
-//            padding: EdgeInsets.only(left: 15.0, bottom: 5),
-//            child: Row(
-//              children: <Widget>[
-//                RichText(
-//                    text: TextSpan(
-//                        // set the default style for the children TextSpans
-//                        children: [
-//                      TextSpan(
-//                          style: TextStyle(
-//                              fontSize: 20,
-//                              fontWeight: FontWeight.w300,
-//                              color: AppColors.mainColor),
-//                          text: 'Bank'),
-//                    ])),
-//              ],
-//            ),
-//          ),
           CreditCardContainer(model: monopoly, card: MonopolyCard.BANKER),
-//          Container(
-//            padding: EdgeInsets.only(left: 15.0, bottom: 5),
-//            child: Row(
-//              children: <Widget>[
-//                RichText(
-//                    text: TextSpan(
-//                        // set the default style for the children TextSpans
-//                        children: [
-//                      TextSpan(
-//                          style: TextStyle(
-//                              fontSize: 20,
-//                              fontWeight: FontWeight.w300,
-//                              color: AppColors.mainColor),
-//                          text: 'Players'),
-//                    ])),
-//              ],
-//            ),
-//          ),
           CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_RED),
           CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_GREEN),
           CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_BLUE),
@@ -230,10 +191,19 @@ class _HomePageState extends State<HomePage>
       child: Container(
         height: 60.0,
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.only(left: 15.0, right: 0.0),
+        padding: EdgeInsets.only(left: 30.0, right: 0.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: Image.asset(
+              "assets/images/monopoly_logo.png",
+              width: 51,
+              height: 51,
+              color: Colors.grey[500],
+            ),
+            ),
             RichText(
                 text: TextSpan(
                     // set the default style for the children TextSpans
@@ -242,9 +212,11 @@ class _HomePageState extends State<HomePage>
                       style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.w700,
-                          color: Colors.grey[800]),
-                      text: 'Monopoly'),
-                ])),
+                          color: Colors.grey[500]),
+                      text: Constants.APP_NAME),
+                ])
+            ),
+
           ],
         ),
       ),
@@ -381,32 +353,10 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  void _toggle() {
-    _innerDrawerKey.currentState.toggle(
-        // direction is optional
-        // if not set, the last direction will be used
-        //InnerDrawerDirection.start OR InnerDrawerDirection.end
-        direction: InnerDrawerDirection.end);
-  }
-
-  void changePage(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _dark_theme
-          ? Color.fromRGBO(8, 33, 38, 1)
-          : CupertinoColors.extraLightBackgroundGray,
+      //backgroundColor: CupertinoColors.darkBackgroundGray,
       drawer: Drawer(),
       //appBar: _buildAppBar(),
       body: _buildBody(),
