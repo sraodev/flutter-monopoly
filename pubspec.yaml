@@ -40,10 +40,15 @@ dependencies:
 
 
 dev_dependencies:
-  flutter_launcher_icons: "^0.7.4"
+  flutter_launcher_icons: ^0.7.5
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path_ios: "assets/launcher/icon.png"
+  image_path_android: "assets/launcher/icon.png"
 
 # For information on the generic Dart pa]rt of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -109,6 +114,7 @@ flutter:
     - family:  MonopolyIcon
       fonts:
         - asset: assets/fonts/MonopolyIcon.ttf
+
 
   # fonts:
   #   - family: Schyler
