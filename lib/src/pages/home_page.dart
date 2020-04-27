@@ -14,7 +14,6 @@ import 'package:monopoly/src/models/models.dart';
 import 'package:monopoly/src/pages/monopoly_details_page.dart';
 import 'package:monopoly/src/widgets/widgets.dart';
 import 'package:monopoly/src/utils/utils.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 
@@ -32,6 +31,7 @@ class _HomePageState extends State<HomePage>
   final GoogleSignIn googleSignIn = GoogleSignIn();
   bool isLoading = false;
   bool isPressed = false;
+  bool isDarkTheme = false;
   final List<dynamic> pages = [
     HomePage(),
   ];
@@ -160,13 +160,6 @@ class _HomePageState extends State<HomePage>
   int selectedPage = 0;
   TabController tabController;
 
-  int _currentIndex = 0;
-  bool _dark_theme = false;
-  int _groupIndex = 0;
-  int _index = 0;
-
-  int _value = 0;
-
   @override
   Widget _buildBody() {
     return SingleChildScrollView(
@@ -174,11 +167,11 @@ class _HomePageState extends State<HomePage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildHeader(),
-          CreditCardContainer(model: monopoly, card: MonopolyCard.BANKER),
-          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_RED),
-          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_GREEN),
-          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_BLUE),
-          CreditCardContainer(model: monopoly, card: MonopolyCard.PLAYER_YELLOW),
+          _buildMonopolyCreditCard(monopoly, MonopolyCard.BANKER),
+          _buildMonopolyCreditCard(monopoly, MonopolyCard.PLAYER_RED),
+          _buildMonopolyCreditCard(monopoly, MonopolyCard.PLAYER_GREEN),
+          _buildMonopolyCreditCard(monopoly, MonopolyCard.PLAYER_BLUE),
+          _buildMonopolyCreditCard(monopoly, MonopolyCard.PLAYER_YELLOW),
         ],
       ),
     );
@@ -224,133 +217,26 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  Widget _buildMonopolyCard(List<Monopoly> plants, MonopolyCard card) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10.0, bottom: 10),
-      child: GestureDetector(
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: plants[card.index].color[0],
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 1.0,
-                ),
-              ]),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  //color : AppColors.mainColor,
-//                  color: (widget.showIndex == index)
-//                      ? AppColors.mainColor
-//                      : AppColors.secondColor,
-                ),
-                height: 100.0,
-                width: 400.0,
-              ),
-              //_buildImage(plant.image),
-              //_buildPrice(plant.price),
-              _buildInfo(plants, card),
-            ],
-          ),
-        ),
-        onTap: () {
-          Navigator.of(context).push(
+  Widget _buildMonopolyCreditCard(List<Monopoly> monopoly, MonopolyCard card) {
+    return Hero(
+        tag: monopoly[card.index].name,
+        child: InkWell(
+          child: CreditCardContainer(model: monopoly, card: card),
+          onTap: () {
+            Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => MonopolyCardDetailPage(plants, card),
+              builder: (context) => MonopolyCardDetailPage(monopoly, card),
             ),
           );
-          // Navigator.push(
-          //   context,
-          //   PageRouteBuilder(
-          //     pageBuilder: (c, a1, a2) => PlantDetail(plant),
-          //     transitionsBuilder: (c, anim, a2, child) =>
-          //         FadeTransition(opacity: anim, child: child),
-          //     transitionDuration: Duration(milliseconds: 0),
-          //   ),
-          // );
-        },
-      ),
-    );
+          },
+        ),
+      );
   }
 
   @override
   initState() {
-    plantGroups.add(monopoly.where((p) => p.top == true).toList());
-    plantGroups
-        .add(monopoly.where((p) => p.type.indexOf('Outdoor') != -1).toList());
-    plantGroups
-        .add(monopoly.where((p) => p.type.indexOf('Indoor') != -1).toList());
-    plantGroups.add(monopoly.where((p) => p.plantOfTheMonth == true).toList());
-
-    tabController = TabController(vsync: this, length: 4);
-    scrollController = ScrollController();
-    scrollController.addListener(changeDescription);
-    setState(() {
-      description = plantGroups[_groupIndex][_index].description;
-    });
     super.initState();
     isLoading = true;
-  }
-
-  Widget _buildInfo(List<Monopoly> plant, MonopolyCard card) {
-    return Positioned(
-      top: 10.0,
-      left: 20.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(height: 2.0),
-          Text(
-            plant[card.index].name,
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.normal,
-              color: Colors.white.withOpacity(0.8),
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Row(
-            children: <Widget>[
-              Container(
-                child: Icon(
-                  MonopolyIcon.dollar,
-                  color: Colors.white38,
-                  size: 33.0,
-                ),
-              ),
-              Container(
-                child: RichText(
-                    text: TextSpan(
-                        // set the default style for the children TextSpans
-                        children: [
-                      TextSpan(
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white),
-                          text: CurrencyFormater.withSuffix(monopoly[card.index].totalAmount)),
-                    ])),
-              ),
-              SizedBox(width: 5.0),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  changeDescription() {
-    _value = scrollController.offset.round();
-    if (_value > 0) {
-      _index = (_value / 220).round();
-      setState(() {
-        description = plantGroups[_groupIndex][_index].description;
-      });
-    }
   }
 
   @override

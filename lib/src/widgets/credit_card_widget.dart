@@ -18,7 +18,7 @@ class CreditCardContainer extends StatelessWidget {
     return Container(
       //MediaQuery.of(context).size.width / 4,
       margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width / 12,
+          horizontal: MediaQuery.of(context).size.width / 15 ,
           vertical: MediaQuery.of(context).size.width / 30),
       decoration: BoxDecoration(
         boxShadow: [
