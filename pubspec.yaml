@@ -83,6 +83,17 @@ flutter:
    - assets/images/credit_card/nfc.png
    - assets/images/credit_card/visa.png
    - assets/images/credit_card/monopoly.png
+   - assets/images/freeze.png
+   - assets/images/more.png
+   - assets/images/passbook.png
+   - assets/images/secret.png
+   - assets/images/transfer.png
+   - assets/images/unlock.png
+   - assets/images/send.png
+   - assets/images/thousand.png
+   - assets/images/million.png
+   - assets/images/pay.png
+   - assets/images/clear.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

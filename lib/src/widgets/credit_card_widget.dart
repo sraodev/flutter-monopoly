@@ -50,6 +50,7 @@ class CreditCardContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -60,7 +61,7 @@ class CreditCardContainer extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(111, 0, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Image.asset(
                     "assets/images/credit_card/monopoly.png",
                     width: 120,
@@ -115,21 +116,15 @@ class CreditCardContainer extends StatelessWidget {
             Container(
               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Text(
+                  Text(
                         model[card.index].name.toUpperCase(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 120,
-                  ),
                   Container(
                     child: Image.asset(
                       "assets/images/credit_card/visa.png",
