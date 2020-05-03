@@ -1,21 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:monopoly/colors.dart' as AppColors;
-import 'package:monopoly/main.dart';
 import 'package:monopoly/src/models/models.dart';
 import 'package:monopoly/src/pages/monopoly_card_page.dart';
-import 'package:monopoly/src/pages/monopoly_details_page.dart';
 import 'package:monopoly/src/widgets/widgets.dart';
 import 'package:monopoly/src/utils/utils.dart';
-
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,9 +17,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
   int currentPage = 0;
-  final databaseReference = FirebaseDatabase.instance.reference();
   String description;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
   bool isLoading = false;
   bool isPressed = false;
   bool isDarkTheme = false;

@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +22,30 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
 
   TextEditingController _textEditingController;
 
+  double transactionAmount = 0;
+  Key _divideKey = Key('divide');
+  Key _minusKey = Key('minus');
+  Key _multiplyKey = Key('multiply');
+  Key _plusKey = Key('plus');
+
   void initState() {
     super.initState();
     _textEditingController = TextEditingController();
+  }
+
+
+  double calculateValue(Key _actionKey, double currentValue, double lastValue ) {
+    double calculatedValue = 0;
+    if (identical(_actionKey, _plusKey)) {
+      calculatedValue = Math.add(lastValue, currentValue);
+    } else if (identical(_actionKey, _minusKey)) {
+      calculatedValue = Math.subtract(lastValue, currentValue);
+    } else if (identical(_actionKey, _multiplyKey)) {
+      calculatedValue = Math.multiply(lastValue, currentValue);
+    } else if (identical(_actionKey, _divideKey)) {
+      calculatedValue = Math.divide(lastValue, currentValue);
+    }
+    return calculatedValue;
   }
 
   Widget _buildPayeeButton(List<Monopoly> monopoly, int payerCardIndex, int payeeCardIndex) {
@@ -33,7 +53,31 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
       circleColor: monopoly[payeeCardIndex].color[1],
       buttonImg: MonopolyIconImages.transfer,
       buttonTitle: monopoly[payeeCardIndex].name.toUpperCase(),
-      onTap: () {},
+      onTap: () {
+        setState(() {
+          double  payerAmount = calculateValue(
+              _minusKey,
+              transactionAmount,
+              monopoly[payerCardIndex].totalAmount);
+
+          if(payerAmount.isNegative) {
+            _textEditingController.clear();
+            _textEditingController.text = 'Low Balance';
+          }else{
+            double payeeAmount = calculateValue(
+                _plusKey,
+                transactionAmount,
+                monopoly[payeeCardIndex].totalAmount);
+            monopoly[payerCardIndex].totalAmount = payerAmount;
+            monopoly[payeeCardIndex].totalAmount = payeeAmount;
+            _textEditingController.clear();
+            _textEditingController.text =
+                CurrencyFormater.withSuffix(payeeAmount);
+          }
+
+        });
+
+      },
     );
   }
 
@@ -58,7 +102,9 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
               Icons.arrow_back_ios,
               color: Colors.black54,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
           actions: <Widget>[
             IconButton(
@@ -116,14 +162,6 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                     child: InkWell(
                       child: CreditCardContainer(model: widget.monopoly, card: widget.card,),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) {
-                              return HomePage();
-                            },
-                          ),
-                        );
                       },
                     ),
                   ),
@@ -157,7 +195,8 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                                   color: Colors.white,
                                   fontSize: 25.0
                               )
-                          ),              ),
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -168,25 +207,52 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           circleColor: MonopolyIconColors.send,
                           buttonImg: MonopolyIconImages.million,
                           buttonTitle: "MILLIONS",
-                          onTap: () {},
+                          onTap: () {
+                            transactionAmount = _textEditingController.text.isEmpty? 1 : double.parse(_textEditingController.text);
+                            print(transactionAmount);
+                            transactionAmount = calculateValue(_multiplyKey, transactionAmount, Constants.MILLION);
+                            setState(() {
+                              _textEditingController.clear();
+                              _textEditingController.text =
+                                  CurrencyFormater.withSuffix(transactionAmount);
+                            });
+                          },
                         ),
                         CustomIconButton(
                           circleColor: MonopolyIconColors.transfer,
                           buttonImg: MonopolyIconImages.thousand,
                           buttonTitle: "THOUSANDS",
-                          onTap: () {},
+                          onTap: () {
+                            transactionAmount = _textEditingController.text.isEmpty? 1 : double.parse(_textEditingController.text);
+                            transactionAmount = calculateValue(_multiplyKey, transactionAmount, Constants.KILO);
+                            setState(() {
+                              _textEditingController.clear();
+                              _textEditingController.text =
+                                  CurrencyFormater.withSuffix(transactionAmount);
+                            });
+                          },
+                        ),
+                        CustomIconButton(
+                          circleColor: MonopolyIconColors.more,
+                          buttonImg: MonopolyIconImages.pay,
+                          buttonTitle: "GO",
+                          onTap: () {
+                            transactionAmount = widget.monopoly[widget.card.index].totalAmount;
+                            transactionAmount = calculateValue(_plusKey, transactionAmount, 2*Constants.MILLION);
+                            setState(() {
+                              widget.monopoly[widget.card.index].totalAmount = transactionAmount;
+                              _textEditingController.text =
+                                  CurrencyFormater.withSuffix(transactionAmount);
+                            });
+                          },
                         ),
                         CustomIconButton(
                           circleColor: MonopolyIconColors.passbook,
                           buttonImg: MonopolyIconImages.clear,
                           buttonTitle: "CLEAR",
-                          onTap: () {},
-                        ),
-                        CustomIconButton(
-                          circleColor: MonopolyIconColors.more,
-                          buttonImg: MonopolyIconImages.pay,
-                          buttonTitle: "PAY",
-                          onTap: () {},
+                          onTap: () {
+                            _textEditingController.clear();
+                          },
                         ),
                       ],
                     ),
@@ -304,11 +370,11 @@ class HistoryListTile extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: ListTile(
-        title: Text(transactionName),
+        title: Text(transactionName, style: TextStyle(fontSize: 15)),
         subtitle: Text(transactionType),
         trailing: Text(transactionAmount),
         leading: CircleAvatar(
-          radius: 25,
+          radius: 20,
           child: Image.asset(
             transactionIcon,
             height: 25,

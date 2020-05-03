@@ -9,7 +9,7 @@ class CurrencyFormater {
 
   static String withSuffix(double count) {
     String currencyUnits = "KMBTQQ";
-    if (count < 1000) {
+    if (count <= 1000) {
       return "" + count.toString();
     }
     int exp = (log(count).toInt() / log(1000)).toInt();
