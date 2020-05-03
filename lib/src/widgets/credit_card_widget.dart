@@ -63,7 +63,7 @@ class CreditCardContainer extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Image.asset(
                     "assets/images/credit_card/monopoly.png",
-                    width: 120,
+                    width: 150,
                     height: 41,
                   ),
                 ),

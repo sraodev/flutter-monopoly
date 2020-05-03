@@ -208,6 +208,7 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           buttonImg: MonopolyIconImages.million,
                           buttonTitle: "MILLIONS",
                           onTap: () {
+                            FocusScope.of(context).requestFocus(new FocusNode());
                             transactionAmount = _textEditingController.text.isEmpty? 1 : double.parse(_textEditingController.text);
                             print(transactionAmount);
                             transactionAmount = calculateValue(_multiplyKey, transactionAmount, Constants.MILLION);
@@ -223,6 +224,7 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           buttonImg: MonopolyIconImages.thousand,
                           buttonTitle: "THOUSANDS",
                           onTap: () {
+                            FocusScope.of(context).requestFocus(new FocusNode());
                             transactionAmount = _textEditingController.text.isEmpty? 1 : double.parse(_textEditingController.text);
                             transactionAmount = calculateValue(_multiplyKey, transactionAmount, Constants.KILO);
                             setState(() {
@@ -237,6 +239,7 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           buttonImg: MonopolyIconImages.pay,
                           buttonTitle: "GO",
                           onTap: () {
+                            FocusScope.of(context).requestFocus(new FocusNode());
                             transactionAmount = widget.monopoly[widget.card.index].totalAmount;
                             transactionAmount = calculateValue(_plusKey, transactionAmount, 2*Constants.MILLION);
                             setState(() {
