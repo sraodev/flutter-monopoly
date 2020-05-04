@@ -131,7 +131,7 @@ class _MonopolyListState extends State<MonopolyList> {
         children: <Widget>[
           SizedBox(height: 2.0),
           Text(
-            plant.name,
+            plant.cardHolderName,
             style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w600,

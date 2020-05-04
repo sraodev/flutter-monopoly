@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:monopoly/colors.dart' as AppColors;
 import 'package:monopoly/src/utils/utils.dart';
 import 'package:flutter/rendering.dart';
-import 'package:monopoly/src/pages/home_page.dart';
 import 'package:monopoly/src/models/models.dart';
 import 'package:monopoly/src/widgets/widgets.dart';
 
@@ -52,13 +51,13 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
     return CustomIconButton(
       circleColor: monopoly[payeeCardIndex].color[1],
       buttonImg: MonopolyIconImages.transfer,
-      buttonTitle: monopoly[payeeCardIndex].name.toUpperCase(),
+      buttonTitle: monopoly[payeeCardIndex].cardHolderName.toUpperCase(),
       onTap: () {
         setState(() {
           double  payerAmount = calculateValue(
               _minusKey,
               transactionAmount,
-              monopoly[payerCardIndex].totalAmount);
+              monopoly[payerCardIndex].cardBalance);
 
           if(payerAmount.isNegative) {
             _textEditingController.clear();
@@ -67,9 +66,9 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
             double payeeAmount = calculateValue(
                 _plusKey,
                 transactionAmount,
-                monopoly[payeeCardIndex].totalAmount);
-            monopoly[payerCardIndex].totalAmount = payerAmount;
-            monopoly[payeeCardIndex].totalAmount = payeeAmount;
+                monopoly[payeeCardIndex].cardBalance);
+            monopoly[payerCardIndex].cardBalance = payerAmount;
+            monopoly[payeeCardIndex].cardBalance = payeeAmount;
             _textEditingController.clear();
             _textEditingController.text =
                 CurrencyFormater.withSuffix(payeeAmount);
@@ -87,7 +86,7 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
         backgroundColor: CupertinoColors.extraLightBackgroundGray,
         appBar: AppBar(
           title: Text(
-            widget.monopoly[widget.card.index].name.toUpperCase(),
+            widget.monopoly[widget.card.index].cardHolderName.toUpperCase(),
             style: TextStyle(
               color: Colors.black54,
               fontWeight: FontWeight.w100,
@@ -240,10 +239,10 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           buttonTitle: "GO",
                           onTap: () {
                             FocusScope.of(context).requestFocus(new FocusNode());
-                            transactionAmount = widget.monopoly[widget.card.index].totalAmount;
+                            transactionAmount = widget.monopoly[widget.card.index].cardBalance;
                             transactionAmount = calculateValue(_plusKey, transactionAmount, 2*Constants.MILLION);
                             setState(() {
-                              widget.monopoly[widget.card.index].totalAmount = transactionAmount;
+                              widget.monopoly[widget.card.index].cardBalance = transactionAmount;
                               _textEditingController.text =
                                   CurrencyFormater.withSuffix(transactionAmount);
                             });
@@ -311,7 +310,7 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           onTap: () {},
                           transactionAmount: "+\$210.00",
                           transactionIcon: MonopolyIconImages.transfer,
-                          transactionName: "Amazigh Halzoun",
+                          transactionName: "PLAYER 1",
                           transactionType: "TRANSFER",
                         ),
                         HistoryListTile(
@@ -319,7 +318,7 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           onTap: () {},
                           transactionAmount: "-\$310.00",
                           transactionIcon: MonopolyIconImages.transfer,
-                          transactionName: "Cybdom Tech",
+                          transactionName: "PLAYER 3",
                           transactionType: "TRANSFER",
                         ),
                         HistoryListTile(
@@ -335,7 +334,7 @@ class _MonopolyCardPageState extends State<MonopolyCardPage> {
                           onTap: () {},
                           transactionAmount: "-\$210.00",
                           transactionIcon: MonopolyIconImages.transfer,
-                          transactionName: "Wife",
+                          transactionName: "BANKER",
                           transactionType: "TRANSFER",
                         ),
                       ],

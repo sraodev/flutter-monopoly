@@ -4,38 +4,23 @@ enum MonopolyCard { BANKER, PLAYER_RED, PLAYER_GREEN, PLAYER_BLUE, PLAYER_YELLOW
 
 class Monopoly {
   Monopoly({
-    this.name,
+    this.cardHolderName,
     this.color,
     this.type,
-    this.top,
-    this.plantOfTheMonth,
-    this.price,
-    this.image,
-    this.size,
-    this.description,
-    this.temperature,
+    this.cardNumber,
+    this.validTo,
     this.light,
-    this.totalAmount,
-    this.soilMoisture,
-    this.waterTankLevel,
-    this.wateringTime,
+    this.cardBalance,
     this.alerts,
   });
 
   String alerts;
-  String description;
-  double totalAmount;
-  String image;
+  String validTo;
+  double cardBalance;
+  String cardNumber;
   double light;
-  String name;
+  String cardHolderName;
   List<Color> color;
-  bool plantOfTheMonth;
-  double price;
-  String size;
-  double soilMoisture;
-  double temperature;
-  bool top;
   List<String> type;
-  double wateringTime;
-  double waterTankLevel;
+
 }

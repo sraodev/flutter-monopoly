@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:monopoly/colors.dart' as AppColors;
+import 'package:random_string/random_string.dart';
 import 'package:monopoly/src/models/models.dart';
 import 'package:monopoly/src/pages/monopoly_card_page.dart';
 import 'package:monopoly/src/widgets/widgets.dart';
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage>
   List<List<Monopoly>> plantGroups = [];
   List<Monopoly> monopoly = [
     Monopoly(
-        name: 'Banker',
+        cardHolderName: 'Banker',
         color: [
           Colors.grey[900],
           Colors.grey[700],
@@ -36,22 +37,14 @@ class _HomePageState extends State<HomePage>
           Colors.grey[200],
         ],
         type: ['Outdoor'],
-        top: true,
-        plantOfTheMonth: true,
-        price: 45.50,
-        size: 'Average',
-        image: 'assets/images/cat_palm.png',
-        description:
-            'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
-        temperature: 20,
+        cardNumber: randomNumeric(4).toString() + " " + randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString() + " " + randomNumeric(4).toString(),
+        validTo:    DateTime.now().month.toString() + "/" + DateTime.now().year.toString(),
         light: 80,
-        totalAmount: 15000000,
-        soilMoisture: 60,
-        waterTankLevel: 10,
-        wateringTime: 30,
+        cardBalance: 150000000,
         alerts: 'Please fill the water tank'),
     Monopoly(
-        name: 'Player 1',
+        cardHolderName: 'Player 1',
         color: [
           Colors.red[900],
           Colors.red[700],
@@ -59,22 +52,16 @@ class _HomePageState extends State<HomePage>
           Colors.red[200],
         ],
         type: ['Outdoor', 'Indoor'],
-        top: true,
-        plantOfTheMonth: false,
-        price: 235.00,
-        size: 'Big',
-        image: 'assets/images/monstera.png',
-        description:
-            'Monstera deliciosa, the ceriman, is a species of flowering plant native to tropical forests of southern Mexico, south to Panama. It has been introduced to many tropical areas, and has become a mildly invasive species in Hawaii, Seychelles, Ascension Island and the Society Islands.',
-        temperature: 20,
+        cardNumber: randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString(),
+        validTo:    DateTime.now().month.toString() + "/" + DateTime.now().year.toString(),
         light: 80,
-        totalAmount: 15000000,
-        soilMoisture: 60,
-        waterTankLevel: 10,
-        wateringTime: 30,
+        cardBalance: 15000000,
         alerts: 'This plant need water'),
     Monopoly(
-        name: 'Player 2',
+        cardHolderName: 'Player 2',
         color: [
           Colors.green[900],
           Colors.green[700],
@@ -82,22 +69,16 @@ class _HomePageState extends State<HomePage>
           Colors.green[200],
         ],
         type: ['Indoor'],
-        top: true,
-        plantOfTheMonth: true,
-        price: 35.00,
-        size: 'Small',
-        image: 'assets/images/bird_of_paradise.png',
-        description:
-            'Strelitzia alba is a herbaceous plant of the Bird of Paradise family and is endemic to the Garden Route along the southernmost coastal regions of the Eastern and Western Cape in South Africa. The Swedish botanist Thunberg, who in 1792 described and published it in Nov. Gen. Pl.: 113 as Strelitzia augusta, first found it in the neighbourhood of the Piesang River at Plettenberg Bay – \'piesang\' being Afrikaans for \'banana\'. Francis Masson, who was then the Botanical Collector for Kew, introduced it to Europe in 1791. This is one of three arborescent Strelitzias, the other two being Strelitzia caudata and Strelitzia nicolai.',
-        temperature: 20,
+        cardNumber: randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString(),
+        validTo:    DateTime.now().month.toString() + "/" + DateTime.now().year.toString(),
         light: 80,
-        totalAmount: 15000000,
-        soilMoisture: 80,
-        waterTankLevel: 10,
-        wateringTime: 30,
+        cardBalance: 15000000,
         alerts: 'Next watering in 1 day (every 7 days)'),
     Monopoly(
-        name: 'Player 3',
+        cardHolderName: 'Player 3',
         color: [
           Colors.blue[900],
           Colors.blue[700],
@@ -105,22 +86,16 @@ class _HomePageState extends State<HomePage>
           Colors.blue[200],
         ],
         type: ['Indoor', 'Outdoor'],
-        top: true,
-        plantOfTheMonth: true,
-        price: 45.50,
-        size: 'Average',
-        image: 'assets/images/cat_palm.png',
-        description:
-            'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
-        temperature: 20,
+        cardNumber: randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString() + " "
+                    + randomNumeric(4).toString(),
+        validTo:    DateTime.now().month.toString() + "/" + DateTime.now().year.toString(),
         light: 80,
-        totalAmount: 15000000,
-        soilMoisture: 60,
-        waterTankLevel: 10,
-        wateringTime: 30,
+        cardBalance: 15000000,
         alerts: 'Please fill the water tank'),
     Monopoly(
-        name: 'Player 4',
+        cardHolderName: 'Player 4',
         color: [
           Colors.yellow[900],
           Colors.yellow[700],
@@ -128,19 +103,11 @@ class _HomePageState extends State<HomePage>
           Colors.yellow[200],
         ],
         type: ['Indoor', 'Outdoor'],
-        top: true,
-        plantOfTheMonth: true,
-        price: 45.50,
-        size: 'Average',
-        image: 'assets/images/cat_palm.png',
-        description:
-            'The Cat Palm is the most popular from the Chamaedora species of trees. The palm itself doesn\'t have a trunk and it’s frawns have a downward growing pattern. They are often used as garden bed “bushy” plants in tropical and subtropical regions under tall growing trees that provide large amounts of shade. The scientific name for the Cat Palm is Chamaedorea (ky-mee-DOR-ee-uh) Cataractarum (kat-uh-RAK-tar-um).',
-        temperature: 20,
+        cardNumber: randomNumeric(4).toString() + " " + randomNumeric(4).toString() + " "
+            + randomNumeric(4).toString() + " " + randomNumeric(4).toString(),
+        validTo:    DateTime.now().month.toString() + "/" + DateTime.now().year.toString(),
         light: 80,
-        totalAmount: 15000000,
-        soilMoisture: 60,
-        waterTankLevel: 10,
-        wateringTime: 30,
+        cardBalance: 15000000,
         alerts: 'Please fill the water tank'),
   ];
 
@@ -149,7 +116,6 @@ class _HomePageState extends State<HomePage>
   int selectedPage = 0;
   TabController tabController;
 
-  @override
   Widget _buildBody() {
     return SingleChildScrollView(
       child: Column(
@@ -208,7 +174,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget _buildMonopolyCreditCard(List<Monopoly> monopoly, MonopolyCard card) {
     return Hero(
-        tag: monopoly[card.index].name,
+        tag: monopoly[card.index].cardHolderName,
         child: InkWell(
           child: CreditCardContainer(model: monopoly, card: card),
           onTap: () {
@@ -235,7 +201,6 @@ class _HomePageState extends State<HomePage>
       drawer: Drawer(),
       //appBar: _buildAppBar(),
       body: _buildBody(),
-      //bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 }

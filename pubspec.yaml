@@ -22,12 +22,9 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   random_string: ^2.0.1
+  flutter_shine: ^0.0.5
   font_awesome_flutter: ^8.5.0
   intl: ^0.15.8
-
-  firebase_auth: ^0.11.1+11
-  firebase_database: ^3.0.4
-  google_sign_in: ^4.0.4
 
   rflutter_alert: ^1.0.3
   flutter_inner_drawer: ^0.5.4
@@ -64,20 +61,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/images/monstera.png
-   - assets/images/aloe_vera.png
-   - assets/images/bird_of_paradise.png
-   - assets/images/cat_palm.png
-   - assets/images/google_logo.png
-   - assets/images/background.jpg
-   - assets/images/plant_logo.png
-   - assets/images/plantify_logo.png
-   - assets/images/icon_home.png
-   - assets/images/icon_search.png
-   - assets/images/icon_menu.png
-   - assets/images/icon_plant.png
-   - assets/images/icon_add.png
-   - assets/images/icon_user.png
    - assets/images/monopoly_logo.png
    - assets/images/credit_card/money_symbol.png
    - assets/images/credit_card/chip.png
@@ -120,14 +103,9 @@ flutter:
     - family:  CustomIcons
       fonts:
         - asset: assets/fonts/CustomIcons.ttf
-    - family:  PlantifyBottomNavIcons
-      fonts:
-        - asset: assets/fonts/PlantifyBottomNavIcons.ttf
     - family:  MonopolyIcon
       fonts:
         - asset: assets/fonts/MonopolyIcon.ttf
-
-
   # fonts:
   #   - family: Schyler
   #     fonts:

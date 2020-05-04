@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:random_string/random_string.dart';
 import 'package:monopoly/src/models/models.dart';
 import 'package:monopoly/src/utils/utils.dart';
+import 'package:flutter_shine/flutter_shine.dart';
 
 class CreditCardContainer extends StatelessWidget {
   CreditCardContainer({
@@ -74,57 +74,84 @@ class CreditCardContainer extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "NET WORTH",
-                      style: TextStyle(color: Colors.white54, fontSize: 10.0),
-                    ),
-                    Text(
-                      "\$" +
-                          CurrencyFormater.withSuffix(
-                              model[card.index].totalAmount),
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ],
-                ),
+                FlutterShine(
+                    builder: (BuildContext context, ShineShadow shineShadow) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "NET WORTH",
+                        style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 10.0,
+                            shadows: shineShadow?.shadows),
+                      ),
+                      Text(
+                        "\$" +
+                            CurrencyFormater.withSuffix(
+                                model[card.index].cardBalance),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            shadows: shineShadow?.shadows),
+                      ),
+                    ],
+                  );
+                }),
               ],
             ),
             SizedBox(
               height: 5,
             ),
-            Text(
-              randomNumeric(4).toString() + " "
-                  + randomNumeric(4).toString() + " "
-                  + randomNumeric(4).toString() + " "
-                  + randomNumeric(4).toString(),
-              style: TextStyle(color: Colors.white54, fontSize: 18),
-            ),
+            FlutterShine(
+                builder: (BuildContext context, ShineShadow shineShadow) {
+              return Text(
+                model[card.index].cardNumber,
+                style: TextStyle(
+                    color: Colors.white60,
+                    fontSize: 18,
+                    shadows: shineShadow?.shadows),
+              );
+            }),
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    model[card.index].name.toUpperCase(),
-                    style: TextStyle(
-                      color: Colors.white54,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        "VALIDTO: ",
-                        style: TextStyle(color: Colors.white54, fontSize: 8.0),
+                  FlutterShine(
+                      builder: (BuildContext context, ShineShadow shineShadow) {
+                    return Text(
+                      model[card.index].cardHolderName.toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.white54,
+                        fontSize: 18,
+                        shadows: shineShadow?.shadows,
                       ),
-                      Text(
-                        DateTime.now().month.toString() + "/" + DateTime.now().year.toString(),
-                        style: TextStyle(color: Colors.white54, fontSize: 11),
-                      ),
-                    ],
-                  ),
+                    );
+                  }),
+                  FlutterShine(
+                      builder: (BuildContext context, ShineShadow shineShadow) {
+                    return Column(
+                      children: <Widget>[
+                        Text(
+                          "VALIDTO: ",
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 8.0,
+                            shadows: shineShadow?.shadows,
+                          ),
+                        ),
+                        Text(
+                          model[card.index].validTo,
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 11,
+                            shadows: shineShadow?.shadows,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                   Container(
                     child: Image.asset(
                       "assets/images/credit_card/visa.png",
