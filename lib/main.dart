@@ -4,9 +4,7 @@ import 'package:monopoly/src/pages/home_page.dart';
 
 void main() => runApp(MonopolyApp());
 
-
 class MonopolyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -11,15 +11,16 @@
 ///      fonts:
 ///       - asset: fonts/MonopolyIcon.ttf
 ///
-/// 
+///
 ///
 import 'package:flutter/widgets.dart';
 
 class MonopolyIcon {
   MonopolyIcon._();
 
+  static const IconData dollar =
+      const IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+
   static const _kFontFam = 'MonopolyIcon';
   static const _kFontPkg = null;
-
-  static const IconData dollar = const IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
