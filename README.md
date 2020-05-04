@@ -4,8 +4,9 @@ Monopoly calculator to calculate and figure out the net worth of the Monopoly ga
 
 
 # Preview
-![iphone xs](assets/images/screenshots/HomePage.png)
-![iphone xs](assets/images/screenshots/RedCard.png)
+![iphone xs]()
+![iphone xs](https://github.com/psrrao/Monopoly/assets/images/screenshots/HomePage.png)
+![Screenshot](assets/images/screenshots/RedCard.png)
 ![iphone xs](assets/images/screenshots/BankerCard.png)
 
 
