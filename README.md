@@ -1,4 +1,4 @@
-# Monopoly
+# Monopoly (एकाधिकारः)
 
 Monopoly is the classic fast-dealing property trading game where players buy, sell, dream and scheme their way to riches. 
 
